@@ -1,0 +1,17 @@
+{
+  "name": "ai-sales-agent",
+  "version": "1.0.0",
+  "description": "A simple AI voice agent that makes and takes sales calls for a business",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "twilio": "^5.3.0",
+    "ws": "^8.18.0"
+  }
+}
