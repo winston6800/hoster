@@ -6,11 +6,11 @@
   --foreground: #eae7e0;
   --foreground-muted: #9a978f;
   --border: #232228;
-  --accent: #f2b134;
-  --accent-foreground: #1a1305;
+  --accent: #d7262c;
+  --accent-foreground: #fff6f5;
   --pillar-inner: #a78bfa;
   --pillar-money: #34d399;
-  --pillar-love: #fb7c5c;
+  --pillar-love: #f2b134;
 }
 
 @theme inline {
