@@ -69,9 +69,15 @@ export default async function BlogPostPage({
       </h1>
 
       <div className="mt-10 space-y-6 text-base leading-relaxed text-foreground">
-        {post.content.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
+        {post.content.map((block, i) =>
+          block.startsWith("## ") ? (
+            <h2 key={i} className="pt-4 text-xl font-semibold text-foreground">
+              {block.slice(3)}
+            </h2>
+          ) : (
+            <p key={i}>{block}</p>
+          )
+        )}
       </div>
 
       {more.length > 0 && (

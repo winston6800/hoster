@@ -18,6 +18,9 @@ export default function Footer() {
           <Link href="/blog" className="hover:text-foreground">
             Blog
           </Link>
+          <Link href="/tools" className="hover:text-foreground">
+            Tools
+          </Link>
           <Link href="/contact" className="hover:text-foreground">
             Contact
           </Link>
