@@ -14,9 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const title = "Understanding ED";
+const title = "MealTrail";
 const description =
-  "Plain-language, judgment-free information about erectile dysfunction: causes, treatment options, and how to talk to a doctor. Not a substitute for medical advice.";
+  "Log and share your meal prep, get AI-generated food ideas, and track your Mediterranean-diet streak — Strava for your kitchen.";
 
 export const metadata: Metadata = {
   title: {

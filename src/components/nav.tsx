@@ -1,21 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/understanding-ed", label: "Understanding ED" },
-  { href: "/causes", label: "Causes" },
-  { href: "/treatment", label: "Treatment" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/resources", label: "Get Help" },
-];
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 export default function Nav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setUser(data.user ?? null));
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  async function signOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+    router.refresh();
+  }
+
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/feed", label: "Feed" },
+    ...(user ? [{ href: "/new", label: "New Post" }] : []),
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
@@ -25,7 +42,7 @@ export default function Nav() {
           className="text-sm font-semibold tracking-tight text-foreground"
           onClick={() => setOpen(false)}
         >
-          Understanding <span className="text-accent">ED</span>
+          Meal<span className="text-accent">Trail</span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -46,6 +63,21 @@ export default function Nav() {
               </Link>
             );
           })}
+          {user ? (
+            <button
+              onClick={signOut}
+              className="text-sm text-foreground-muted hover:text-foreground"
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
 
         <button
@@ -71,6 +103,25 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
+          {user ? (
+            <button
+              onClick={() => {
+                setOpen(false);
+                signOut();
+              }}
+              className="rounded-md px-2 py-2 text-left text-sm text-foreground-muted hover:bg-background-elevated hover:text-foreground"
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-2 py-2 text-sm text-foreground-muted hover:bg-background-elevated hover:text-foreground"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       )}
     </header>

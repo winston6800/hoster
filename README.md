@@ -1,29 +1,50 @@
-# Understanding ED
+# MealTrail
 
-A plain-language, judgment-free information site about erectile dysfunction
-— built with Next.js (App Router) and Tailwind CSS.
+"Strava for meal prep" — a social feed where people log their meal preps,
+get AI-generated Mediterranean food ideas, and follow what the niche is
+making. One-time $35 access via Stripe (test mode).
 
-This is educational content only, not medical advice, and doesn't sell or
-endorse any product. The goal is to help someone walk into a real doctor's
-appointment better informed.
+See `PIVOTS.md` for how this repo got here — it started as an ED support
+site and pivoted twice.
+
+## Stack
+
+- Next.js (App Router) + Tailwind CSS
+- Supabase (Postgres + Auth) for accounts, posts, likes, purchases
+- Stripe Checkout (test mode) for the one-time $35 unlock
+- Anthropic API for AI-generated meal-prep ideas
 
 ## Structure
 
-- `/` — home page: hero, quick facts, when to see a doctor, section links
-- `/understanding-ed` — what ED is, how common it is, myths vs. facts
-- `/causes` — vascular/physical, psychological, and lifestyle causes
-- `/treatment` — overview of treatment approaches
-- `/faq` — common questions, including how to talk to a doctor or partner
-- `/resources` — trustworthy organizations and crisis resources
+- `/` — landing page, pricing, "how it works"
+- `/login` — sign up / sign in
+- `/join` — paywall: pay $35 once via Stripe Checkout
+- `/success` — post-checkout confirmation (also flips `has_paid` directly,
+  since this dev environment has no stable public URL for a Stripe webhook)
+- `/feed` — public post feed, like button (paid users can like/post)
+- `/new` — new post form with an AI "Generate" button (paid users only)
 
-## Development
+## Setup
 
 ```bash
 npm install
-npm run dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+`.env.example` already has the real Supabase URL + anon key for the
+project provisioned for this app. You still need to fill in:
+
+- `SUPABASE_SERVICE_ROLE_KEY` — Supabase Dashboard > Project Settings > API
+- `STRIPE_SECRET_KEY` — Stripe Dashboard > Developers > API keys, **test mode** (`sk_test_...`)
+- `STRIPE_WEBHOOK_SECRET` — optional here; `/success` confirms payment directly as a fallback
+- `ANTHROPIC_API_KEY` — https://console.anthropic.com/settings/keys
+
+Also, in Supabase Auth settings, turn off "Confirm email" for easier local
+testing (no mail server configured for this project).
+
+```bash
+npm run dev
+```
 
 ## Build
 
