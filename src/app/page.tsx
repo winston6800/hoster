@@ -1,188 +1,154 @@
 import Link from "next/link";
-import PostCard from "@/components/post-card";
-import { posts } from "@/lib/posts";
 
-const pillars = [
+const facts = [
   {
-    key: "inner",
-    label: "Inner Security",
-    color: "text-pillar-inner",
-    border: "border-pillar-inner/30",
-    glow: "bg-pillar-inner/10",
-    description:
-      "Regulate your own emotions instead of outsourcing the job to whoever is nearby. Stop needing everyone's approval to feel okay.",
+    stat: "Very common",
+    detail:
+      "Most men experience trouble getting or keeping an erection at some point. Risk rises with age, but ED is not an inevitable part of aging, and it isn't rare in younger men either.",
   },
   {
-    key: "money",
-    label: "Financial Security",
-    color: "text-pillar-money",
-    border: "border-pillar-money/30",
-    glow: "bg-pillar-money/10",
-    description:
-      "A buffer, a habit, and enough time for compounding to work. Boring on purpose, because boring is what actually holds up.",
+    stat: "Usually physical",
+    detail:
+      "It's often tied to blood flow, nerves, hormones, or medications — and can be an early warning sign of heart or vascular problems worth checking out.",
   },
   {
-    key: "love",
-    label: "Real Relationships",
-    color: "text-pillar-love",
-    border: "border-pillar-love/30",
-    glow: "bg-pillar-love/10",
-    description:
-      "Not lines and volume — the slower skill of being fully known by one person for a long time, and staying worth choosing.",
+    stat: "Highly treatable",
+    detail:
+      "The large majority of cases improve with the right combination of lifestyle changes, medical treatment, or counseling — often more than one at once.",
   },
-] as const;
+];
 
 export default function Home() {
-  const latestPosts = [...posts]
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .slice(0, 3);
-
   return (
     <div>
       {/* Hero */}
-      <section className="bg-grid border-b border-border">
-        <div className="mx-auto max-w-5xl px-6 py-24 sm:py-32">
-          <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            factory settings are not your destiny
+      <section className="border-b border-border bg-accent-soft/40">
+        <div className="mx-auto max-w-5xl px-6 py-24 sm:py-28">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            you are not broken, and you are not alone
           </p>
-          <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl">
-            Nothing about who you become is set by default.
+          <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
+            Erectile dysfunction is common, treatable, and nothing to be
+            ashamed of.
           </h1>
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-foreground-muted">
-            Left unconfigured, most people default to reactive, broke, and
-            capable of only shallow connection. Dead by Default is a field
-            guide to changing the settings on purpose — building real inner
-            security, financial security, and relationships that last longer
-            than a season.
+            This site exists to give you clear, judgment-free information
+            about what ED is, why it happens, and what actually helps — so
+            you can have a better conversation with a doctor, or with a
+            partner.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              href="/about"
+              href="/understanding-ed"
               className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
             >
-              Read the philosophy
+              Start here
             </Link>
             <Link
-              href="/blog"
-              className="rounded-md border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-foreground-muted/60"
+              href="/resources"
+              className="rounded-md border border-border bg-background-elevated px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent/60"
             >
-              Start with the blog
+              Find help now
             </Link>
           </div>
         </div>
       </section>
 
-      {/* The problem */}
+      {/* Quick facts */}
       <section className="mx-auto max-w-5xl px-6 py-20">
-        <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-foreground-muted">
-          The default configuration
+        <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground-muted">
+          Three things worth knowing right away
         </h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          <div className="rounded-xl border border-border p-6">
-            <p className="font-mono text-sm text-accent">01</p>
-            <p className="mt-3 text-foreground">
-              Reactive by default — run by whoever provoked you last, with no
-              floor of your own to stand on.
-            </p>
-          </div>
-          <div className="rounded-xl border border-border p-6">
-            <p className="font-mono text-sm text-accent">02</p>
-            <p className="mt-3 text-foreground">
-              Broke by default — income scales with lifestyle, no buffer, no
-              plan, one bad month from crisis.
-            </p>
-          </div>
-          <div className="rounded-xl border border-border p-6">
-            <p className="font-mono text-sm text-accent">03</p>
-            <p className="mt-3 text-foreground">
-              Shallow by default — optimized for the first yes, never taught
-              the slower skill of being known for years.
-            </p>
-          </div>
+          {facts.map((fact) => (
+            <div
+              key={fact.stat}
+              className="rounded-xl border border-border bg-background-elevated p-6"
+            >
+              <p className="font-semibold text-accent">{fact.stat}</p>
+              <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
+                {fact.detail}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Pillars */}
-      <section className="border-t border-border bg-background-elevated/40">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-foreground-muted">
-            Three settings worth changing on purpose
-          </h2>
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
-            {pillars.map((pillar) => (
-              <div
-                key={pillar.key}
-                className={`rounded-xl border ${pillar.border} ${pillar.glow} p-6`}
-              >
-                <h3 className={`text-lg font-semibold ${pillar.color}`}>
-                  {pillar.label}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
-                  {pillar.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Manifesto excerpt */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <div className="rounded-2xl border border-border p-8 sm:p-12">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            from the philosophy
-          </p>
-          <p className="mt-4 max-w-2xl text-balance text-xl leading-relaxed text-foreground sm:text-2xl">
-            &ldquo;Insecurity is expensive. It makes you defensive when you
-            could be curious, controlling when you could be trusting,
-            short-term when you could be building something that
-            compounds.&rdquo;
-          </p>
-          <Link
-            href="/about"
-            className="mt-6 inline-block font-mono text-sm text-accent hover:underline"
-          >
-            Read the full manifesto &rarr;
-          </Link>
-        </div>
-      </section>
-
-      {/* Latest posts */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <div className="flex items-end justify-between">
-            <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-foreground-muted">
-              Latest from the blog
-            </h2>
-            <Link href="/blog" className="font-mono text-xs text-accent hover:underline">
-              View all &rarr;
+      {/* When to see a doctor */}
+      <section className="border-t border-border bg-warm-soft/40">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+          <div className="rounded-2xl border border-warm/30 bg-background-elevated p-8 sm:p-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-warm">
+              worth a doctor visit
+            </p>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">
+              If it&rsquo;s happening regularly — not just once or twice — it&rsquo;s
+              worth talking to a doctor. ED can be an early signal of
+              cardiovascular disease, diabetes, or low testosterone, so
+              getting it checked is about more than sex.
+            </p>
+            <Link
+              href="/faq"
+              className="mt-6 inline-block text-sm font-semibold text-accent hover:underline"
+            >
+              How to talk to a doctor about it &rarr;
             </Link>
           </div>
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
-            {latestPosts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="border-t border-border bg-background-elevated/40">
-        <div className="mx-auto flex max-w-5xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold text-foreground">
-              Stop running on default.
-            </h2>
-            <p className="mt-2 max-w-md text-foreground-muted">
-              Have a question, a disagreement, or something worth adding to
-              the conversation? Reach out.
-            </p>
-          </div>
+      {/* Explore sections */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground-muted">
+          Explore
+        </h2>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2">
           <Link
-            href="/contact"
-            className="shrink-0 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+            href="/understanding-ed"
+            className="rounded-xl border border-border bg-background-elevated p-6 transition-colors hover:border-accent/50"
           >
-            Get in touch
+            <h3 className="text-lg font-semibold text-foreground">
+              Understanding ED
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+              What it is, how common it is, and the myths worth retiring.
+            </p>
+          </Link>
+          <Link
+            href="/causes"
+            className="rounded-xl border border-border bg-background-elevated p-6 transition-colors hover:border-accent/50"
+          >
+            <h3 className="text-lg font-semibold text-foreground">
+              Causes &amp; Risk Factors
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+              Physical, psychological, and lifestyle factors, and how they
+              interact.
+            </p>
+          </Link>
+          <Link
+            href="/treatment"
+            className="rounded-xl border border-border bg-background-elevated p-6 transition-colors hover:border-accent/50"
+          >
+            <h3 className="text-lg font-semibold text-foreground">
+              Treatment Options
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+              An honest overview of what&rsquo;s available, from lifestyle changes
+              to medical treatment.
+            </p>
+          </Link>
+          <Link
+            href="/resources"
+            className="rounded-xl border border-border bg-background-elevated p-6 transition-colors hover:border-accent/50"
+          >
+            <h3 className="text-lg font-semibold text-foreground">
+              Get Help
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+              Where to go next — trustworthy organizations and how to find
+              the right specialist.
+            </p>
           </Link>
         </div>
       </section>

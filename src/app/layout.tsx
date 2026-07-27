@@ -14,13 +14,11 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://deadbydefault.com";
-const title = "Dead by Default";
+const title = "Understanding ED";
 const description =
-  "Nothing about you is set by default. A field guide to inner security, financial security, and relationships built to last.";
+  "Plain-language, judgment-free information about erectile dysfunction: causes, treatment options, and how to talk to a doctor. Not a substitute for medical advice.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
   title: {
     default: title,
     template: `%s — ${title}`,
@@ -29,14 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    url: siteUrl,
-    siteName: title,
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
   },
 };
 

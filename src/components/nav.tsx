@@ -6,9 +6,11 @@ import { useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "Philosophy" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { href: "/understanding-ed", label: "Understanding ED" },
+  { href: "/causes", label: "Causes" },
+  { href: "/treatment", label: "Treatment" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/resources", label: "Get Help" },
 ];
 
 export default function Nav() {
@@ -16,19 +18,17 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="font-mono text-sm font-semibold tracking-tight text-foreground"
+          className="text-sm font-semibold tracking-tight text-foreground"
           onClick={() => setOpen(false)}
         >
-          <span className="text-accent">dead</span>
-          <span className="text-foreground-muted">://</span>
-          <span>by-default</span>
+          Understanding <span className="text-accent">ED</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 sm:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {links.map((link) => {
             const active =
               link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -38,7 +38,7 @@ export default function Nav() {
                 href={link.href}
                 className={`text-sm transition-colors ${
                   active
-                    ? "text-foreground"
+                    ? "font-semibold text-accent"
                     : "text-foreground-muted hover:text-foreground"
                 }`}
               >
@@ -50,17 +50,17 @@ export default function Nav() {
 
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground sm:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="font-mono text-sm">{open ? "×" : "≡"}</span>
+          <span className="text-sm">{open ? "×" : "≡"}</span>
         </button>
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-border px-6 pb-4 sm:hidden">
+        <nav className="flex flex-col gap-1 border-t border-border px-6 pb-4 lg:hidden">
           {links.map((link) => (
             <Link
               key={link.href}

@@ -1,21 +1,20 @@
-# Dead by Default
+# Understanding ED
 
-A field guide to inner security, financial security, and relationships built
-to last — built with Next.js (App Router) and Tailwind CSS.
+A plain-language, judgment-free information site about erectile dysfunction
+— built with Next.js (App Router) and Tailwind CSS.
 
-Nothing about who you become is set by default. Left unconfigured, most
-people default to reactive, broke, and capable of only shallow connection.
-This site is organized around three settings worth changing on purpose:
-**inner security**, **financial security**, and **real, long-term
-relationships**.
+This is educational content only, not medical advice, and doesn't sell or
+endorse any product. The goal is to help someone walk into a real doctor's
+appointment better informed.
 
 ## Structure
 
-- `/` — home page: hero, the problem, the three pillars, manifesto excerpt, latest posts
-- `/about` — the full philosophy/manifesto
-- `/blog` — post index
-- `/blog/[slug]` — individual posts (content lives in `src/lib/posts.ts`)
-- `/contact` — contact info
+- `/` — home page: hero, quick facts, when to see a doctor, section links
+- `/understanding-ed` — what ED is, how common it is, myths vs. facts
+- `/causes` — vascular/physical, psychological, and lifestyle causes
+- `/treatment` — overview of treatment approaches
+- `/faq` — common questions, including how to talk to a doctor or partner
+- `/resources` — trustworthy organizations and crisis resources
 
 ## Development
 
