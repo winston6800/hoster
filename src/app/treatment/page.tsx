@@ -49,7 +49,39 @@ export default function TreatmentPage() {
         men end up combining more than one approach.
       </p>
 
-      <div className="mt-12 space-y-6">
+      <div className="mt-12 rounded-2xl border border-accent/30 bg-accent-soft/40 p-6 sm:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          the surprising fix
+        </p>
+        <h2 className="mt-2 text-xl font-semibold text-foreground">
+          A Mediterranean-style diet is a genuine, evidence-backed treatment
+        </h2>
+        <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
+          This isn&rsquo;t generic &ldquo;eat healthy&rdquo; advice — it&rsquo;s
+          a specific finding from clinical research. In a randomized trial of
+          men with metabolic syndrome, researchers found that switching to a
+          Mediterranean-style diet — olive oil, vegetables, fruit, legumes,
+          whole grains, fish and nuts, less red meat and refined carbs —
+          measurably improved erectile function scores over about two years,
+          compared with men who kept eating a typical Western diet. Separate
+          long-term cohort research has linked higher intake of
+          flavonoid-rich foods in the same dietary pattern (berries, citrus,
+          red wine in moderation) to lower rates of ED.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
+          The mechanism makes sense once you know the cause: most ED is a
+          blood-flow problem, and this diet is one of the best-studied ways
+          to improve the health of the blood vessel lining (endothelial
+          function), lower inflammation, and improve insulin sensitivity —
+          the same vascular pathway that&rsquo;s often behind ED in the first
+          place. It works best for ED with a vascular or metabolic
+          component, which is the most common kind, and it takes months, not
+          days. It&rsquo;s a genuine complement to medical treatment, not a
+          replacement for one.
+        </p>
+      </div>
+
+      <div className="mt-6 space-y-6">
         {options.map((option) => (
           <div
             key={option.title}
