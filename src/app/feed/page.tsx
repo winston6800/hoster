@@ -1,22 +1,38 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { HEALTH_FOCUSES, focusLabel } from "@/lib/health-focus";
 import LikeButton from "./like-button";
 
 export const dynamic = "force-dynamic";
 
-export default async function FeedPage() {
+export default async function FeedPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ focus?: string }>;
+}) {
+  const { focus } = await searchParams;
+  const activeFocus = HEALTH_FOCUSES.some((f) => f.value === focus)
+    ? focus
+    : undefined;
+
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: posts, error } = await supabase
+  let query = supabase
     .from("posts")
     .select(
-      "id, title, description, ingredients, niche, ai_generated, created_at, user_id, profiles(username, display_name), likes(user_id)",
+      "id, title, description, ingredients, niche, health_focus, ai_generated, created_at, user_id, profiles(username, display_name), likes(user_id)",
     )
     .order("created_at", { ascending: false })
     .limit(50);
+
+  if (activeFocus) {
+    query = query.eq("health_focus", activeFocus);
+  }
+
+  const { data: posts, error } = await query;
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
@@ -39,6 +55,32 @@ export default async function FeedPage() {
         )}
       </div>
 
+      <div className="mt-6 flex flex-wrap gap-2">
+        <Link
+          href="/feed"
+          className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+            !activeFocus
+              ? "border-accent bg-accent-soft text-accent"
+              : "border-border text-foreground-muted hover:border-accent/50"
+          }`}
+        >
+          All focuses
+        </Link>
+        {HEALTH_FOCUSES.map((f) => (
+          <Link
+            key={f.value}
+            href={`/feed?focus=${f.value}`}
+            className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+              activeFocus === f.value
+                ? "border-accent bg-accent-soft text-accent"
+                : "border-border text-foreground-muted hover:border-accent/50"
+            }`}
+          >
+            {f.label}
+          </Link>
+        ))}
+      </div>
+
       {error && (
         <p className="mt-8 text-sm text-red-600">
           Couldn&rsquo;t load the feed: {error.message}
@@ -47,7 +89,7 @@ export default async function FeedPage() {
 
       {!error && posts?.length === 0 && (
         <p className="mt-12 text-foreground-muted">
-          No posts yet.{" "}
+          No posts yet for this focus.{" "}
           {user ? (
             <Link href="/new" className="text-accent hover:underline">
               Be the first to post
@@ -83,9 +125,14 @@ export default async function FeedPage() {
                     </span>
                   )}
                 </p>
-                <span className="rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent">
-                  {post.niche}
-                </span>
+                <div className="flex gap-1.5">
+                  <span className="rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent">
+                    {post.niche}
+                  </span>
+                  <span className="rounded-full bg-olive-soft px-2 py-0.5 text-xs font-semibold text-olive">
+                    {focusLabel(post.health_focus)}
+                  </span>
+                </div>
               </div>
               <h2 className="mt-3 text-lg font-semibold text-foreground">
                 {post.title}

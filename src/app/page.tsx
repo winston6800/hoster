@@ -9,12 +9,13 @@ export default function Home() {
             mediterranean, for now
           </p>
           <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
-            Strava for your meal prep.
+            Design your diet around what your body actually needs.
           </h1>
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-foreground-muted">
-            Log what you prep, get AI-generated Mediterranean food ideas when
-            you&rsquo;re out of inspiration, and see what everyone else in the
-            feed is making this week.
+            Pick a focus — heart health, weight management, more protein,
+            blood sugar, or general wellness — and share the meals you cook
+            around it. AI-generated Mediterranean ideas are tuned to that
+            focus, not generic.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
@@ -39,24 +40,24 @@ export default function Home() {
         </h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
           <div className="rounded-xl border border-border bg-background-elevated p-6">
-            <p className="font-semibold text-accent">1. Post</p>
+            <p className="font-semibold text-accent">1. Set your focus</p>
             <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
-              Log a meal prep — what you made, what&rsquo;s in it — the same
-              way you&rsquo;d log a run.
+              Heart health, weight management, more protein, blood sugar, or
+              general wellness — pick one at sign-up, change it any time.
             </p>
           </div>
           <div className="rounded-xl border border-border bg-background-elevated p-6">
-            <p className="font-semibold text-accent">2. Generate</p>
+            <p className="font-semibold text-accent">2. Generate or log</p>
             <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
-              Stuck on what to make? Get an AI-generated Mediterranean idea
-              from a few ingredients or none at all.
+              Get an AI-generated Mediterranean idea tuned to your focus, or
+              log what you actually cooked and its ingredients.
             </p>
           </div>
           <div className="rounded-xl border border-border bg-background-elevated p-6">
-            <p className="font-semibold text-accent">3. Follow the feed</p>
+            <p className="font-semibold text-accent">3. Follow by focus</p>
             <p className="mt-3 text-sm leading-relaxed text-foreground-muted">
-              See what the niche is making, like the ones that inspire your
-              next prep.
+              Filter the feed by focus to see what people with the same goal
+              are actually eating.
             </p>
           </div>
         </div>

@@ -1,28 +1,34 @@
 # MealTrail
 
-"Strava for meal prep" — a social feed where people log their meal preps,
-get AI-generated Mediterranean food ideas, and follow what the niche is
-making. One-time $35 access via Stripe (test mode).
+A diet-design app: pick a health focus (heart health, weight management,
+more protein, blood sugar friendly, or general wellness), share the
+Mediterranean meals you cook tagged to it, and get AI-generated ideas tuned
+to that focus instead of generic Mediterranean suggestions. One-time $35
+access via Stripe (test mode).
 
 See `PIVOTS.md` for how this repo got here — it started as an ED support
-site and pivoted twice.
+site and has pivoted a few times since.
 
 ## Stack
 
 - Next.js (App Router) + Tailwind CSS
 - Supabase (Postgres + Auth) for accounts, posts, likes, purchases
 - Stripe Checkout (test mode) for the one-time $35 unlock
-- Anthropic API for AI-generated meal-prep ideas
+- Anthropic API for AI-generated, focus-tuned meal-prep ideas
 
 ## Structure
 
 - `/` — landing page, pricing, "how it works"
-- `/login` — sign up / sign in
+- `/login` — sign up (picks a health focus) / sign in
 - `/join` — paywall: pay $35 once via Stripe Checkout
 - `/success` — post-checkout confirmation (also flips `has_paid` directly,
   since this dev environment has no stable public URL for a Stripe webhook)
-- `/feed` — public post feed, like button (paid users can like/post)
-- `/new` — new post form with an AI "Generate" button (paid users only)
+- `/feed` — public post feed with focus filter chips, like button (paid
+  users can like/post)
+- `/new` — new post form: pick a focus, optionally hit "Generate" for an
+  AI idea tuned to it (paid users only)
+- `src/lib/health-focus.ts` — the 5 focus values, labels, and the guidance
+  text each one adds to the AI prompt
 
 ## Setup
 

@@ -14,7 +14,7 @@ export default async function NewPostPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("has_paid")
+    .select("has_paid, health_focus")
     .eq("id", user.id)
     .single();
 
@@ -31,10 +31,10 @@ export default async function NewPostPage() {
         Share a meal prep
       </h1>
       <p className="mt-2 text-foreground-muted">
-        Write your own, or get an AI-generated Mediterranean idea to start
-        from.
+        Write your own, or get an AI-generated Mediterranean idea tuned to
+        your focus.
       </p>
-      <NewPostForm />
+      <NewPostForm defaultHealthFocus={profile.health_focus} />
     </div>
   );
 }

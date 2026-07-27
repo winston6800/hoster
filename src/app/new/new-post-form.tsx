@@ -3,12 +3,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { HEALTH_FOCUSES } from "@/lib/health-focus";
 
-export default function NewPostForm() {
+export default function NewPostForm({
+  defaultHealthFocus,
+}: {
+  defaultHealthFocus: string;
+}) {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState("");
+  const [healthFocus, setHealthFocus] = useState(defaultHealthFocus);
   const [aiGenerated, setAiGenerated] = useState(false);
   const [aiPrompt, setAiPrompt] = useState("");
   const [generating, setGenerating] = useState(false);
@@ -22,7 +28,7 @@ export default function NewPostForm() {
       const res = await fetch("/api/generate-idea", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: aiPrompt }),
+        body: JSON.stringify({ prompt: aiPrompt, healthFocus }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Generation failed.");
@@ -55,6 +61,7 @@ export default function NewPostForm() {
         ingredients: ingredients || null,
         ai_generated: aiGenerated,
         niche: "mediterranean",
+        health_focus: healthFocus,
       });
       if (insertError) throw insertError;
 
@@ -70,6 +77,21 @@ export default function NewPostForm() {
     <div className="mt-8">
       <div className="rounded-xl border border-border bg-background-elevated p-5">
         <label className="block text-sm font-medium text-foreground">
+          Focus for this post
+        </label>
+        <select
+          value={healthFocus}
+          onChange={(e) => setHealthFocus(e.target.value)}
+          className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+        >
+          {HEALTH_FOCUSES.map((f) => (
+            <option key={f.value} value={f.value}>
+              {f.label}
+            </option>
+          ))}
+        </select>
+
+        <label className="mt-4 block text-sm font-medium text-foreground">
           Ask the AI for an idea (optional)
         </label>
         <div className="mt-2 flex gap-2">
@@ -89,6 +111,9 @@ export default function NewPostForm() {
             {generating ? "Thinking…" : "Generate"}
           </button>
         </div>
+        <p className="mt-2 text-xs text-foreground-muted">
+          Generates a Mediterranean idea tuned to the focus selected above.
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">

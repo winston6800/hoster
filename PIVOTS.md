@@ -39,3 +39,19 @@ Running record of what this repo has been, in order, so we don't lose the thread
    - `ANTHROPIC_API_KEY` for the AI idea generator
    - Turning off "Confirm email" in Supabase Auth settings for smoother
      local testing (no mail server configured)
+
+5. **Pivot (current)** — "diet design app": reframed from a pure social
+   feed to personalization-first. Users pick a health focus at sign-up
+   (heart health / weight management / more protein / blood sugar
+   friendly / general wellness), share the Mediterranean ingredients/meals
+   they cook tagged to that focus, and the AI idea generator biases its
+   suggestions toward the selected focus instead of a generic Mediterranean
+   idea. Feed gained focus filter chips.
+
+   Status: built on top of the mealprep-strava schema — added
+   `health_focus` column (checked against the 5 known values) to both
+   `profiles` and `posts` via a new migration, zero new security
+   advisories. Sign-up form, new-post form, feed (filter + badge), and
+   `/api/generate-idea` all updated and wired to it. Same untested-live
+   caveat as above (sandbox network policy blocks `supabase.co`) — verified
+   via build/lint/typecheck plus direct screenshots of the rendered UI.

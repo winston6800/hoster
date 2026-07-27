@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { HEALTH_FOCUSES } from "@/lib/health-focus";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [healthFocus, setHealthFocus] = useState<string>(HEALTH_FOCUSES[0].value);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,6 +33,7 @@ export default function LoginPage() {
         const { error: profileError } = await supabase.from("profiles").insert({
           id: data.user.id,
           username: username || email.split("@")[0],
+          health_focus: healthFocus,
         });
         if (profileError && profileError.code !== "23505") throw profileError;
 
@@ -66,18 +69,40 @@ export default function LoginPage() {
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         {mode === "signup" && (
-          <div>
-            <label className="block text-sm font-medium text-foreground">
-              Username
-            </label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 w-full rounded-md border border-border bg-background-elevated px-3 py-2 text-sm"
-              placeholder="mediterraneanmike"
-            />
-          </div>
+          <>
+            <div>
+              <label className="block text-sm font-medium text-foreground">
+                Username
+              </label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="mt-1 w-full rounded-md border border-border bg-background-elevated px-3 py-2 text-sm"
+                placeholder="mediterraneanmike"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">
+                What&rsquo;s your focus?
+              </label>
+              <select
+                value={healthFocus}
+                onChange={(e) => setHealthFocus(e.target.value)}
+                className="mt-1 w-full rounded-md border border-border bg-background-elevated px-3 py-2 text-sm"
+              >
+                {HEALTH_FOCUSES.map((f) => (
+                  <option key={f.value} value={f.value}>
+                    {f.label}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1 text-xs text-foreground-muted">
+                Tunes your AI-generated ideas and defaults on new posts. You
+                can change this any time.
+              </p>
+            </div>
+          </>
         )}
         <div>
           <label className="block text-sm font-medium text-foreground">

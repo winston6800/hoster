@@ -52,6 +52,7 @@ export type Database = {
           ai_generated: boolean
           created_at: string
           description: string | null
+          health_focus: string
           id: string
           image_url: string | null
           ingredients: string | null
@@ -63,6 +64,7 @@ export type Database = {
           ai_generated?: boolean
           created_at?: string
           description?: string | null
+          health_focus?: string
           id?: string
           image_url?: string | null
           ingredients?: string | null
@@ -74,6 +76,7 @@ export type Database = {
           ai_generated?: boolean
           created_at?: string
           description?: string | null
+          health_focus?: string
           id?: string
           image_url?: string | null
           ingredients?: string | null
@@ -96,6 +99,7 @@ export type Database = {
           created_at: string
           display_name: string | null
           has_paid: boolean
+          health_focus: string
           id: string
           username: string
         }
@@ -103,6 +107,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           has_paid?: boolean
+          health_focus?: string
           id: string
           username: string
         }
@@ -110,6 +115,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           has_paid?: boolean
+          health_focus?: string
           id?: string
           username?: string
         }

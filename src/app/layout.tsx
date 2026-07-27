@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const title = "MealTrail";
 const description =
-  "Log and share your meal prep, get AI-generated food ideas, and track your Mediterranean-diet streak — Strava for your kitchen.";
+  "Design your diet around a health focus you pick, share the Mediterranean meals you cook, and get AI-generated ideas tuned to that focus.";
 
 export const metadata: Metadata = {
   title: {
