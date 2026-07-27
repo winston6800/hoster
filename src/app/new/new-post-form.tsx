@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { HEALTH_FOCUSES } from "@/lib/health-focus";
+import StackTower from "@/components/stack-tower";
 
 export default function NewPostForm({
   defaultHealthFocus,
@@ -65,7 +66,7 @@ export default function NewPostForm({
       });
       if (insertError) throw insertError;
 
-      router.push("/feed");
+      router.push("/stack?justAdded=1");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Couldn't post.");
@@ -75,7 +76,22 @@ export default function NewPostForm({
 
   return (
     <div className="mt-8">
-      <div className="rounded-xl border border-border bg-background-elevated p-5">
+      <div className="flex items-end justify-center overflow-hidden pb-1">
+        <StackTower
+          items={[
+            {
+              id: "preview",
+              title: title || "Your next block",
+              health_focus: healthFocus,
+            },
+          ]}
+        />
+      </div>
+      <p className="text-center text-xs text-foreground-muted">
+        This is the block that&rsquo;ll drop onto your stack.
+      </p>
+
+      <div className="mt-6 rounded-xl border border-border bg-background-elevated p-5">
         <label className="block text-sm font-medium text-foreground">
           Focus for this post
         </label>
@@ -160,7 +176,7 @@ export default function NewPostForm({
           disabled={submitting}
           className="rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
         >
-          {submitting ? "Posting…" : "Post to feed"}
+          {submitting ? "Stacking…" : "Add to my stack"}
         </button>
       </form>
     </div>

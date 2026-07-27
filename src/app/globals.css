@@ -45,3 +45,68 @@ body {
 .text-balance {
   text-wrap: balance;
 }
+
+/* --- Meal stack (isometric block tower) --- */
+
+.stack-tower {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  perspective: 900px;
+}
+
+.stack-block-wrap {
+  height: 43px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.stack-drop {
+  transform-style: preserve-3d;
+  margin-left: var(--wobble, 0px);
+}
+
+.stack-block {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  transform-style: preserve-3d;
+  transform: rotateX(-35.264deg) rotateY(45deg);
+}
+
+.stack-face {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 3px;
+}
+.stack-face.front {
+  transform: translateZ(26px);
+  filter: brightness(0.82);
+}
+.stack-face.right {
+  transform: rotateY(-90deg) translateZ(26px);
+  filter: brightness(0.66);
+}
+.stack-face.top {
+  transform: rotateX(90deg) translateZ(26px);
+  filter: brightness(1.15);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stack-block-new {
+    animation: stackDrop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+}
+
+@keyframes stackDrop {
+  from {
+    transform: translateY(-40px) scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

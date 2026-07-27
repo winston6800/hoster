@@ -55,3 +55,22 @@ Running record of what this repo has been, in order, so we don't lose the thread
    `/api/generate-idea` all updated and wired to it. Same untested-live
    caveat as above (sandbox network policy blocks `supabase.co`) — verified
    via build/lint/typecheck plus direct screenshots of the rendered UI.
+
+6. **Enhancement** — "make creating your meal stack really fun to build
+   and follow." Added a literal visual "stack": `/stack` shows every meal
+   a user has posted as a tower of isometric blocks (real CSS 3D, colored
+   by health focus), plus a streak counter (consecutive days posted) and
+   total count. `/new` shows a live preview of the block about to be added
+   and links back to the running total; posting redirects to `/stack` so
+   the new block visibly drops onto the tower.
+
+   Found and fixed a real CSS 3D bug along the way: `rotateY(90deg)` on
+   the "right" face silhouetted correctly in isolation but silently failed
+   to render at all once combined with the parent's
+   `rotateX(-35.264deg) rotateY(45deg)` — needed `rotateY(-90deg)`
+   instead. Also found that animating `transform` directly on the same
+   element holding the static isometric rotation broke rendering
+   intermittently; fixed by animating a separate 2D wrapper instead and
+   leaving the rotated cube's transform untouched. Verified via an
+   isolated CSS test file and a temporary (deleted before commit) preview
+   route, not just visual guesswork.

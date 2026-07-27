@@ -31,7 +31,12 @@ export default function Nav() {
   const links = [
     { href: "/", label: "Home" },
     { href: "/feed", label: "Feed" },
-    ...(user ? [{ href: "/new", label: "New Post" }] : []),
+    ...(user
+      ? [
+          { href: "/stack", label: "My Stack" },
+          { href: "/new", label: "New Post" },
+        ]
+      : []),
   ];
 
   return (

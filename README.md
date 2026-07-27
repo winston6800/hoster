@@ -26,9 +26,15 @@ site and has pivoted a few times since.
 - `/feed` — public post feed with focus filter chips, like button (paid
   users can like/post)
 - `/new` — new post form: pick a focus, optionally hit "Generate" for an
-  AI idea tuned to it (paid users only)
+  AI idea tuned to it, see a live preview of the block about to be added
+  (paid users only)
+- `/stack` — your own posts as a tower of isometric blocks, colored by
+  health focus, plus a streak counter and total count
 - `src/lib/health-focus.ts` — the 5 focus values, labels, and the guidance
   text each one adds to the AI prompt
+- `src/lib/streak.ts` — consecutive-day streak calculation
+- `src/components/stack-tower.tsx` — the isometric block tower (real CSS
+  3D, no images/libraries)
 
 ## Setup
 

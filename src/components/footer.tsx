@@ -12,6 +12,9 @@ export default function Footer() {
             <Link href="/feed" className="hover:text-foreground">
               Feed
             </Link>
+            <Link href="/stack" className="hover:text-foreground">
+              My Stack
+            </Link>
             <Link href="/new" className="hover:text-foreground">
               New Post
             </Link>
