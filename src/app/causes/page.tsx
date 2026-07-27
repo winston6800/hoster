@@ -27,6 +27,7 @@ const groups = [
       "Stress and general anxiety",
       "Depression, or the medications used to treat it",
       "Relationship tension or unresolved conflict",
+      "Compulsive or escalating porn use, in some men (see note below — the research here is real but contested)",
     ],
   },
   {
@@ -75,7 +76,29 @@ export default function CausesPage() {
         ))}
       </div>
 
-      <div className="mt-12 rounded-2xl border border-warm/30 bg-warm-soft/40 p-6">
+      <div className="mt-12 rounded-2xl border border-border bg-background-elevated p-6">
+        <p className="font-semibold text-foreground">
+          A note on porn and ED
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+          This gets asked about a lot, and it deserves a straight answer
+          instead of a scary number. Some researchers have proposed that
+          heavy, escalating porn use can desensitize the brain&rsquo;s reward
+          response enough to make real-life arousal harder — the theory is
+          usually called porn-induced ED. Clinical reports of younger men
+          seeking ED treatment have genuinely increased in recent decades.
+          But the direct evidence is thinner than the theory: other studies
+          looking specifically for a link between porn use and ED in young
+          men haven&rsquo;t found one, and the rise in young-onset ED is more
+          reliably tied to anxiety, depression, obesity, alcohol, and
+          performance pressure — porn is one hypothesized piece, not a
+          settled, quantified cause. If cutting back on porn is something
+          you want to try, it&rsquo;s a reasonable experiment; just know the
+          science doesn&rsquo;t support treating it as the default explanation.
+        </p>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-warm/30 bg-warm-soft/40 p-6">
         <p className="font-semibold text-foreground">
           Why this matters beyond the bedroom
         </p>
