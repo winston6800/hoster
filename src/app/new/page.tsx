@@ -38,11 +38,11 @@ export default async function NewPostPage() {
         new post
       </p>
       <h1 className="mt-2 text-3xl font-semibold text-foreground">
-        Add to your stack
+        What are you cooking?
       </h1>
       <p className="mt-2 text-foreground-muted">
-        Write your own, or get an AI-generated Mediterranean idea tuned to
-        your focus.
+        Set your focus and restrictions, generate a few dishes that fit all
+        of them, or just write your own.
       </p>
 
       {count > 0 && (

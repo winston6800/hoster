@@ -25,13 +25,16 @@ site and has pivoted a few times since.
   since this dev environment has no stable public URL for a Stripe webhook)
 - `/feed` — public post feed with focus filter chips, like button (paid
   users can like/post)
-- `/new` — new post form: pick a focus, optionally hit "Generate" for an
-  AI idea tuned to it, see a live preview of the block about to be added
-  (paid users only)
+- `/new` — "Build your menu": set focus + dietary restrictions + free-text
+  constraints, generate 3 dishes that satisfy all of them, pick one to
+  post (or just write your own) (paid users only)
 - `/stack` — your own posts as a tower of isometric blocks, colored by
   health focus, plus a streak counter and total count
 - `src/lib/health-focus.ts` — the 5 focus values, labels, and the guidance
   text each one adds to the AI prompt
+- `src/lib/dietary-restrictions.ts` — the 7 restriction values and the
+  rule text fed to the model (every returned dish must satisfy all
+  selected restrictions, substituting ingredients rather than breaking one)
 - `src/lib/streak.ts` — consecutive-day streak calculation
 - `src/components/stack-tower.tsx` — the isometric block tower (real CSS
   3D, no images/libraries)

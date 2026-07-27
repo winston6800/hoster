@@ -74,3 +74,29 @@ Running record of what this repo has been, in order, so we don't lose the thread
    leaving the rotated cube's transform untouched. Verified via an
    isolated CSS test file and a temporary (deleted before commit) preview
    route, not just visual guesswork.
+
+7. **Feedback: the tower "looks trash," refocus on the actual point** —
+   user said the visual gamification wasn't landing and clarified what
+   they actually want: fun, simple, AI-generated dishes that satisfy
+   *every* stated constraint at once — health focus, dietary restrictions,
+   free-form asks (allergies, time limit, what's in the fridge). Rebuilt
+   `/api/generate-idea` to take `{healthFocus, restrictions[], constraints,
+   count}` and return `count` distinct dishes that must all satisfy every
+   constraint (with the model told to substitute correctly rather than
+   break a constraint, e.g. rice instead of couscous for gluten-free).
+   `/new` now leads with a "Build your menu" panel — health focus select,
+   toggleable dietary-restriction chips (vegetarian/vegan/pescatarian/
+   gluten-free/dairy-free/nut-free/shellfish-free), a free-text field, and
+   a "Generate my menu" button that returns 3 dishes as pickable cards;
+   clicking one fills the post form below. Removed the single-idea "type
+   one ingredient" flow and the live single-block preview in favor of
+   this. The stack tower page itself is untouched and still reachable,
+   just no longer the featured mechanic.
+
+   New file: `src/lib/dietary-restrictions.ts` (7 restrictions + the rule
+   text fed to the model). Verified with a temporary preview route
+   (deleted before commit): restriction chips toggle correctly, a mocked
+   3-dish response renders as selectable cards, picking one fills the
+   form, and generate/submit errors now show independently instead of
+   duplicating (a real bug caught while testing — both flows shared one
+   error state).
